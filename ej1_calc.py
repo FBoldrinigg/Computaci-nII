@@ -60,7 +60,11 @@ def calculate(parameters):
 		result = num1 * num2
 		operator = '*'
 	else:
-		result = num1 / num2
+		try:
+			result = num1 / num2
+		except ZeroDivisionError as error:
+			print("Error, ", error)
+			return ""
 	return "\n" + str(num1) + ' ' + operator + ' ' + str(num2) +  " = " + str(result) + "\n"
 
 
