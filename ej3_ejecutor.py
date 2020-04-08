@@ -47,7 +47,7 @@ def main():
     error = process.communicate()[1]
     if not error:
         log_file.write(str(datetime.datetime.now()) + " Comando " + command + " ejecutado correctamente.\n\n")
-        out_file.write("\n"s)
+        out_file.write("\n")
     else:
         log_file.write(str(datetime.datetime.now()) + "  " + str(error) + "\n\n")
     out_file.close()
