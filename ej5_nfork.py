@@ -27,11 +27,11 @@ def readArgs():
 
 def main():
     try:
-        N = int(readArgs())
+        n = int(readArgs())
     except  ValueError:
         print("Entered argument is not an integer")
         sys.exit(0)
-    for _ in range(N):
+    for _ in range(n):
         if not fork():
             print("Soy el proceso: ", getpid(), ". Mi padre es el proceso: ", getppid())
             _exit(0)
