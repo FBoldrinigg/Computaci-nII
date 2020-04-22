@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
-import sys
-import time
+
+from sys import exit
+from time import sleep
 from os import fork, getpid, wait, _exit, kill, getppid
-import signal
+from signal import signal, SIGUSR1, pause
 
 
 def handler(sid, frame):
@@ -11,28 +12,28 @@ def handler(sid, frame):
 
 
 def main():
-    signal.signal(signal.SIGUSR1, handler)
-    count = 10
+    signal(SIGUSR1, handler)
     if fork():
+        count = 10
         pid2 = fork()
         if pid2:
             while count:
-                signal.pause()
-                kill(pid2, signal.SIGUSR1)
+                pause()
+                kill(pid2, SIGUSR1)
                 count -= 1
             wait()
-            sys.exit(0)
+            exit(0)
         else:
             while count:
-                signal.pause()
+                pause()
                 print("Soy el hijo2, con PID: ", getpid(), "pong")
                 count -= 1
             _exit(0)
     else:
         for _ in range(10):
-            kill(getppid(), signal.SIGUSR1)
+            kill(getppid(), SIGUSR1)
             print("Soy el hijo1, con PID: ", getpid(), "ping")
-            time.sleep(5)
+            sleep(5)
         _exit(0)
 
 
