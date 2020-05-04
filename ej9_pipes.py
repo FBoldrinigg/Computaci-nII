@@ -27,7 +27,7 @@ def main():
             w.close()
             kill(fpid, SIGUSR2)
         else:
-            #syncing father and p1
+            #letting father know  p1 is ready
             kill(fpid, SIGUSR2)
             pause()
             w = fdopen(w, "w")
