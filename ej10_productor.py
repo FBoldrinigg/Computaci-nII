@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-
+from sys import argv
 from os import mkfifo, path
 
 
@@ -9,7 +9,7 @@ def main():
     if not path.exists(fifoPath):
         mkfifo(fifoPath)
     pipeout = open(fifoPath, "w")
-    pipeout.write(input("Ingresar mensaje: ") + "\n")
+    pipeout.write(" ".join(argv[1:]) + "\n")
     pipeout.close()
 
 
